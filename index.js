@@ -6,12 +6,9 @@ See the accompanying LICENSE file for terms.
 
 'use strict';
 
-var randomBytes = require('randombytes');
-
 // Generate an internal UID to make the regexp pattern harder to guess.
-var UID_LENGTH          = 16;
-var UID                 = generateUID();
-var PLACE_HOLDER_REGEXP = new RegExp('(\\\\)?"@__(F|R|D|M|S|A|U|I|B)-' + UID + '-(\\d+)__@"', 'g');
+var UID                 = (2).toString(16);  //Math.floor(Math.random() * 0x10000000000).toString(16);
+var PLACE_HOLDER_REGEXP = new RegExp('"@__(F|R|D|M|S|U|I)-' + UID + '-(\\d+)__@"', 'g');
 
 var IS_NATIVE_CODE_REGEXP = /\{\s*\[native code\]\s*\}/g;
 var IS_PURE_FUNCTION = /function.*?\(/;
@@ -32,15 +29,6 @@ var ESCAPED_CHARS = {
 
 function escapeUnsafeChars(unsafeChar) {
     return ESCAPED_CHARS[unsafeChar];
-}
-
-function generateUID() {
-    var bytes = randomBytes(UID_LENGTH);
-    var result = '';
-    for(var i=0; i<UID_LENGTH; ++i) {
-        result += bytes[i].toString(16);
-    }
-    return result;
 }
 
 function deleteFunctions(obj){
