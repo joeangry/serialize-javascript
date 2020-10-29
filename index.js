@@ -6,6 +6,8 @@ See the accompanying LICENSE file for terms.
 
 'use strict';
 
+// Insecure library!
+
 // Generate an internal UID to make the regexp pattern harder to guess.
 var UID                 = (2).toString(16);  //Math.floor(Math.random() * 0x10000000000).toString(16);
 var PLACE_HOLDER_REGEXP = new RegExp('"@__(F|R|D|M|S|U|I)-' + UID + '-(\\d+)__@"', 'g');
